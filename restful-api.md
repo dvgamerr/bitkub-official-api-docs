@@ -2,8 +2,7 @@
 # RESTful API for Bitkub (2025-10-10)
 
 # Announcement
-* The following market endpoints will be deprecated on 1 Dec 2025. Please use [v3 endpoints](#non-secure-endpoints-v3) as replacement: [GET /api/market/symbols](#get-apimarketsymbols), [GET /api/market/ticker](#get-apimarketticker), [GET /api/market/trades](#get-apimarkettrades), [GET /api/market/bids](#get-apimarketbids), [GET /api/market/asks](#get-apimarketasks), [GET /api/market/books](#get-apimarketbooks), [GET /api/market/depth](#get-apimarketdepth)
-* New endpoint [GET /api/v3/market/symbols](#get-apiv3marketsymbols) is now available. The old [GET /api/market/symbols](#get-apimarketsymbols) will be deprecated on 9 Dec 2025.
+* The following market endpoints will be deprecated on 9 Dec 2025. Please use [v3 endpoints](#non-secure-endpoints-v3) as replacement: [GET /api/market/symbols](#get-apimarketsymbols), [GET /api/market/ticker](#get-apimarketticker), [GET /api/market/trades](#get-apimarkettrades), [GET /api/market/bids](#get-apimarketbids), [GET /api/market/asks](#get-apimarketasks), [GET /api/market/books](#get-apimarketbooks), [GET /api/market/depth](#get-apimarketdepth)
 * Page-based pagination will be deprecated on 8 Sep 2025 for [my-order-history](#get-apiv3marketmy-order-history).
 * Order history older than 90 days is archived for [my-order-history] (#get-apiv3marketmy-order-history) More details here.
 * order_id and txn_id formats of [my-open-orders](#get-apiv3marketmy-open-orders), [my-order-history](#get-apiv3marketmy-order-history), [my-order-info](#get-apiv3marketorder-info), [place-bid](#post-apiv3marketplace-bid), [place-ask](#post-apiv3marketplace-ask), [cancel-order](#post-apiv3marketcancel-order) may change for some symbols due to a system upgrade, See affected symbols and detail : [here](https://support.bitkub.com/en/support/solutions/articles/151000214886-announcement-trading-system-upgrade)
