@@ -2,6 +2,7 @@
 # RESTful API for Bitkub (2025-10-10)
 
 # Announcement
+* The following market endpoints will be deprecated on 1 Dec 2025. Please use [v3 endpoints](#non-secure-endpoints-v3) as replacement: [GET /api/market/symbols](#get-apimarketsymbols), [GET /api/market/ticker](#get-apimarketticker), [GET /api/market/trades](#get-apimarkettrades), [GET /api/market/bids](#get-apimarketbids), [GET /api/market/asks](#get-apimarketasks), [GET /api/market/books](#get-apimarketbooks), [GET /api/market/depth](#get-apimarketdepth)
 * New endpoint [GET /api/v3/market/symbols](#get-apiv3marketsymbols) is now available. The old [GET /api/market/symbols](#get-apimarketsymbols) will be deprecated on 9 Dec 2025.
 * Page-based pagination will be deprecated on 8 Sep 2025 for [my-order-history](#get-apiv3marketmy-order-history).
 * Order history older than 90 days is archived for [my-order-history] (#get-apiv3marketmy-order-history) More details here.
@@ -41,13 +42,6 @@
 Our existing endpoints remain available for use. However, for enhanced security and performance, we strongly recommend utilizing the new [Non-Secure Endpoint V3](#non-secure-endpoints-v3).
 * [GET /api/status](#get-apistatus)
 * [GET /api/servertime](#get-apiservertime)
-* [GET /api/market/symbols](#get-apimarketsymbols)
-* [GET /api/market/ticker](#get-apimarketticker)
-* [GET /api/market/trades](#get-apimarkettrades)
-* [GET /api/market/bids](#get-apimarketbids)
-* [GET /api/market/asks](#get-apimarketasks)
-* [GET /api/market/books](#get-apimarketbooks)
-* [GET /api/market/depth](#get-apimarketdepth)
 * [GET /tradingview/history](#get-tradingviewhistory)
 * [GET /api/v3/servertime](#get-apiv3servertime)
 
@@ -240,182 +234,6 @@ List all available symbols.
 }
 ```
 
-### GET /api/market/symbols
-
-#### Description:
-List all available symbols.
-
-#### Query:
-- n/a
-
-#### Response:
-```javascript
-{
-  "error": 0,
-  "result": [
-    {
-      "id": 1,
-      "symbol": "THB_BTC",
-      "info": "Thai Baht to Bitcoin"
-    },
-    {
-      "id": 2,
-      "symbol": "THB_ETH",
-      "info": "Thai Baht to Ethereum"
-    }
-  ]
-}
-```
-
-### GET /api/market/ticker
-
-#### Description:
-Get ticker information.
-
-#### Query:
-* `sym` **string** The symbol (optional)
-  * e.g. thb_btc
-
-#### Response:
-```javascript
-{
-  "THB_BTC": {
-    "id": 1,
-    "last": 216415.00,
-    "lowestAsk": 216678.00,
-    "highestBid": 215000.00,
-    "percentChange": 1.91,
-    "baseVolume": 71.02603946,
-    "quoteVolume": 15302897.99,
-    "isFrozen": 0,
-    "high24hr": 221396.00,
-    "low24hr": 206414.00
-  },
-  "THB_ETH": {
-    "id": 2,
-    "last": 11878.00,
-    "lowestAsk": 12077.00,
-    "highestBid": 11893.00,
-    "percentChange": -0.49,
-    "baseVolume": 455.17839270,
-    "quoteVolume": 5505664.42,
-    "isFrozen": 0,
-    "high24hr": 12396.00,
-    "low24hr": 11645.00
-  }
-}
-```
-
-### GET /api/market/trades
-
-#### Description:
-List recent trades.
-
-#### Query:
-* `sym`		**string** The symbol (e.g. thb_btc)
-* `lmt`		**int** No. of limit to query recent trades
-
-#### Response:
-```javascript
-{
-  "error": 0,
-  "result": [
-    [
-      1529516287, // timestamp
-      10000.00, // rate
-      0.09975000, // amount
-      "BUY" // side
-    ]
-  ]
-}
-```
-
-### GET /api/market/bids
-#### Description:
-List open buy orders.
-
-#### Query:
-* `sym` **string** The symbol (e.g. thb_btc)
-* `lmt` **int** No. of limit to query open buy orders
-
-#### Response:
-```javascript
-{
-  "error": 0,
-  "result": [
-    [
-      "1", // order id
-      1529453033, // timestamp
-      997.50, // volume
-      10000.00, // rate
-      0.09975000 // amount
-    ]
-  ]
-}
-
-```
-
-### GET /api/market/asks
-
-
-#### Description:
-List open sell orders.
-
-#### Query:
-* `sym` **string** The symbol (e.g. thb_btc)
-* `lmt` **int** No. of limit to query open sell orders
-
-#### Response:
-```javascript
-{
-  "error": 0,
-  "result": [
-    [
-      "680", // order id
-      1529491094, // timestamp
-      997.50, // volume
-      10000.00, // rate
-      0.09975000 // amount
-    ]
-  ]
-}
-```
-
-### GET /api/market/books
-#### Description:
-List all open orders.
-
-#### Query:
-* `sym` **string** The symbol (e.g. thb_btc)
-* `lmt` **int** No. of limit to query open orders
-
-#### Response:
-```javascript
-{
-  "error": 0,
-  "result": {
-    "bids": [
-      [
-        "1", // order id
-        1529453033, // timestamp
-        997.50, // volume
-        10000.00, // rate
-        0.09975000 // amount
-      ]
-    ],
-    "asks": [
-      [
-        "680", // order id
-        1529491094, // timestamp
-        997.50, // volume
-        10000.00, // rate
-        0.09975000 // amount
-      ]
-    ]
-  }
-}
-```
-
 ### GET /tradingview/history
 #### Description:
 Get historical data for TradingView chart.
@@ -468,66 +286,6 @@ Get historical data for TradingView chart.
   ]
 }
 ```
-
-### GET /api/market/depth
-
-#### Description:
-Get depth information.
-
-#### Query:
-* `sym` **string** The symbol (e.g. thb_btc)
-* `lmt` **int** Depth size
-
-#### Response:
-```javascript
-{
-  "asks": [
-    [
-      262600,
-      0.61905798
-    ],
-    [
-      263000,
-      0.00210796
-    ],
-    [
-      263200,
-      0.89555545
-    ],
-    [
-      263422.5,
-      0.03796183
-    ],
-    [
-      263499,
-      0.4123439
-    ]
-  ],
-  "bids": [
-    [
-      262510,
-      0.38038703
-    ],
-    [
-      262100.01,
-      1.22519999
-    ],
-    [
-      262100,
-      0.00381533
-    ],
-    [
-      262024.88,
-      0.00352718
-    ],
-    [
-      262001,
-      0.09999961
-    ]
-  ]
-}
-```
-
 
 ## Market Data Endpoint
 
@@ -1362,16 +1120,15 @@ If the request rate exceeds the limit in any endpoints, the request will be bloc
 
 | Endpoint                     | Rate Limit       |
 | ---------------------------- | ---------------- |
-| /api/market/ticker           | 100 req/sec      |
-| /api/market/depth            | 10 req/sec       |
-| /api/market/symbols          | 100 req/sec      |
-| /api/market/trades           | 100 req/sec      |
-| /api/market/bids             | 100 req/sec      |
-| /api/market/asks             | 100 req/sec      |
-| /api/market/books            | 100 req/sec      |
+| /api/v3/market/ticker        | 100 req/sec      |
+| /api/v3/market/depth         | 10 req/sec       |
+| /api/v3/market/symbols       | 100 req/sec      |
+| /api/v3/market/trades        | 100 req/sec      |
+| /api/v3/market/bids          | 100 req/sec      |
+| /api/v3/market/asks          | 100 req/sec      |
 | /api/market/order-info       | 100 req/sec      |
 | /api/market/my-open-orders   | 150 req/sec      |
-| /api/market/my-order-history | 100 req/sec      | 
+| /api/market/my-order-history | 100 req/sec      |
 | /api/market/place-bid        | 150 req/sec       |
 | /api/market/place-ask        | 150 req/sec       |
 | /api/market/cancel-order     | 200 req/sec      |
